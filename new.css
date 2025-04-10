@@ -1,0 +1,166 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Heading */
+h1 {
+    margin-top: 2rem;
+    height: 5vw;
+    background-color: #211C84;
+    color: #D5E5D5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem; /* Default font size for large screens */
+}
+
+/* Icon */
+#icon {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+}
+
+.icon {
+    position: absolute;
+    left: 4rem;
+}
+
+/* Game Container */
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5rem;
+    gap: 3rem;
+    flex-wrap: wrap; /* Ensure images wrap on smaller screens */
+}
+
+/* Element Style */
+.element {
+    height: 200px;
+    width: 13%;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.element:hover {
+    cursor: pointer;
+    background-color: black;
+}
+
+/* Image Style */
+img {
+    height: 190px;
+    width: 190px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Result Section */
+.result {
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+
+#msg {
+    border-radius: 20px;
+    padding: 1rem;
+    background-color: black;
+    font-size: 3rem;
+    display: inline;
+}
+
+/* Scoreboard */
+.scorecard {
+    font-size: 2rem;
+    margin: 3rem;
+    gap: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Media Queries for Responsiveness */
+
+/* Tablet-sized Screens */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem; /* Adjust heading size */
+        height: auto; /* Adjust height to fit content */
+    }
+
+    .icon {
+        left: 2rem; /* Adjust icon position */
+    }
+
+    .container {
+        gap: 2rem;
+    }
+
+    .element {
+        width: 25%; /* Adjust element size on tablet */
+        height: 150px;
+    }
+
+    img {
+        height: 140px;
+        width: 140px;
+    }
+
+    #msg {
+        font-size: 2rem; /* Adjust result font size */
+        padding: 0.8rem;
+    }
+
+    .scorecard {
+        flex-direction: column; /* Stack the scorecards vertically */
+        font-size: 1.5rem;
+        gap: 1.5rem;
+    }
+}
+
+/* Mobile-sized Screens */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem; /* Adjust heading size for small screens */
+        height: auto; /* Ensure heading height adjusts */
+    }
+
+    .icon {
+        left: 1rem; /* Further reduce the icon's left margin */
+    }
+
+    .container {
+        flex-direction: column; /* Stack elements vertically */
+        gap: 1.5rem;
+    }
+
+    .element {
+        width: 50%; /* Make the elements larger on small screens */
+        height: 120px;
+    }
+
+    img {
+        height: 110px;
+        width: 110px;
+    }
+
+    #msg {
+        font-size: 1.5rem; /* Smaller font size for the result message */
+        padding: 0.5rem;
+    }
+
+    .scorecard {
+        flex-direction: column; /* Stack scorecards vertically */
+        font-size: 1.2rem;
+        gap: 1rem;
+    }
+}
