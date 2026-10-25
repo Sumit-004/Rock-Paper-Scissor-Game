@@ -1,0 +1,283 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;600;800&display=swap');
+
+:root {
+  --bg: #1b1730;
+  --bg-glow: #241d42;
+  --surface: #2a2447;
+  --surface-line: #3c3465;
+  --text: #f5f3ff;
+  --muted: #9a92c2;
+
+  --rock: #ff6b4a;
+  --paper: #4ecdc4;
+  --scissors: #ffd23f;
+
+  --rock-dark: #c9492e;
+  --paper-dark: #2f9e97;
+  --scissors-dark: #cf9f1f;
+
+  --radius: 22px;
+  --shadow-deep: 0 14px 0 rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 20% -10%, var(--bg-glow) 0%, transparent 55%),
+    radial-gradient(circle at 90% 10%, rgba(255, 107, 74, 0.08) 0%, transparent 45%),
+    var(--bg);
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 20px 64px;
+}
+
+/* ---------------- Heading ---------------- */
+
+.heading {
+  text-align: center;
+  margin-bottom: 44px;
+}
+
+.heading h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  letter-spacing: 0.06em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.heading .icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, var(--rock), var(--scissors));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 4px var(--surface), 0 0 24px rgba(255, 210, 63, 0.35);
+}
+
+.heading .icon img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.4));
+}
+
+/* ---------------- Choice buttons ---------------- */
+
+.container {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 56px;
+}
+
+.element {
+  --accent: var(--muted);
+  --accent-dark: var(--surface-line);
+
+  width: 140px;
+  height: 140px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 3px solid var(--surface-line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 10px 0 var(--accent-dark), 0 16px 24px rgba(0, 0, 0, 0.4);
+  transform: translateY(0);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.2s ease;
+}
+
+.element::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 0;
+}
+
+.element img {
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.2s ease;
+}
+
+#rock {
+  --accent: var(--rock);
+  --accent-dark: var(--rock-dark);
+}
+
+#paper {
+  --accent: var(--paper);
+  --accent-dark: var(--paper-dark);
+}
+
+#scissors {
+  --accent: var(--scissors);
+  --accent-dark: var(--scissors-dark);
+}
+
+.element:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent);
+  box-shadow: 0 16px 0 var(--accent-dark), 0 26px 34px rgba(0, 0, 0, 0.45);
+}
+
+.element:hover::after {
+  opacity: 0.16;
+}
+
+.element:hover img {
+  transform: scale(1.12) rotate(-4deg);
+}
+
+.element:active {
+  transform: translateY(4px);
+  box-shadow: 0 4px 0 var(--accent-dark), 0 8px 14px rgba(0, 0, 0, 0.4);
+}
+
+/* Optional state classes — add these via JS on selection for extra polish */
+.element.selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent), 0 10px 0 var(--accent-dark), 0 0 30px var(--accent);
+}
+
+.element.win {
+  animation: pulseWin 0.6s ease infinite alternate;
+}
+
+@keyframes pulseWin {
+  from {
+    box-shadow: 0 0 0 4px var(--accent), 0 10px 0 var(--accent-dark), 0 0 18px var(--accent);
+  }
+  to {
+    box-shadow: 0 0 0 4px var(--accent), 0 10px 0 var(--accent-dark), 0 0 42px var(--accent);
+  }
+}
+
+/* ---------------- Scorecard ---------------- */
+
+.scorecard {
+  display: flex;
+  gap: 0;
+  background: var(--surface);
+  border: 3px solid var(--surface-line);
+  border-radius: 18px;
+  overflow: hidden;
+  margin-bottom: 32px;
+  box-shadow: var(--shadow-deep);
+}
+
+.scorecard > div {
+  padding: 18px 40px;
+  text-align: center;
+  min-width: 120px;
+}
+
+.scorecard > div:first-child {
+  background: linear-gradient(180deg, rgba(255, 107, 74, 0.18), transparent);
+  border-right: 3px solid var(--surface-line);
+}
+
+.scorecard > div:last-child {
+  background: linear-gradient(180deg, rgba(78, 205, 196, 0.16), transparent);
+}
+
+.scorecard p:first-child {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin: 0 0 4px;
+  line-height: 1;
+}
+
+.scorecard p:last-child {
+  margin: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* ---------------- Result message ---------------- */
+
+.result {
+  min-height: 32px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 2px solid var(--surface-line);
+}
+
+.result p {
+  margin: 0;
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  text-align: center;
+}
+
+/* ---------------- Responsive ---------------- */
+
+@media (max-width: 520px) {
+  .container {
+    gap: 18px;
+  }
+
+  .element {
+    width: 104px;
+    height: 104px;
+  }
+
+  .element img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .scorecard > div {
+    padding: 14px 24px;
+  }
+}
+
+/* ---------------- Accessibility ---------------- */
+
+.element:focus-visible,
+.result:focus-visible {
+  outline: 3px solid var(--scissors);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .element,
+  .element img,
+  .element.win {
+    transition: none;
+    animation: none;
+  }
+}
